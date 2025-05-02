@@ -26,3 +26,11 @@ jobs:
         run: |
           cd myApp.Tests
           dotnet test
+
+  publish:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Publishing app
+        run: dotnet publish
