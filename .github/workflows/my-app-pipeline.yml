@@ -43,16 +43,14 @@ jobs:
       - name: Validate report
         run: ./scripts/validate_report.sh
 
-  # publish:
-  #   runs-on: self-hosted
-  #   needs: ["build", "test"]
-  #   steps:
-  #     - uses: actions/checkout@v4
+  publish:
+    runs-on: self-hosted
+    needs: ["build", "test"]
+    steps:
+      - uses: actions/checkout@v4
 
-  #     - name: Publishing app
-  #       run: |
-  #         dotnet publish
-  #         tree ./myApp/bin/Release
+      - name: Publishing app
+        run: dotnet publish
 
   deploy-dev:
     runs-on: self-hosted
@@ -69,10 +67,8 @@ jobs:
     steps:
       # - uses: actions/checkout@v4
 
-      - name: Publishing app
-        run: dotnet publish
+      # - name: Publishing app
+      #   run: dotnet publish
 
       - name: Running production app
-        run: |
-          tree ./myApp/bin/Release
-          ./myApp/bin/Release/netcoreapp8/publish/myApp
+        run: ./myApp/bin/Release/netcoreapp8/publish/myApp
