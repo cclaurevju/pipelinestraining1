@@ -68,4 +68,6 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Running production app
-        run: ./myApp/bin/Release/netcoreapp8/publish/myApp
+        run: |
+          tree ./myApp/bin/Release
+          ./myApp/bin/Release/netcoreapp8/publish/myApp
