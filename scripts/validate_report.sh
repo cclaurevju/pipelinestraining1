@@ -2,7 +2,7 @@
 
 echo "Check Report status"
 
-REPORT_PATH="reports/report"
+REPORT_PATH="reports/report.xml"
 
 FILTER="Program.cs:"
 
