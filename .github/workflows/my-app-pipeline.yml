@@ -23,7 +23,9 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Running tests
-        run: dotnet test -p:CollectCoverage=true -p:CoverletOutputFormat=cobertura -p:CoverletOutput=./reports/coverage
+        run: dotnet test -p:CollectCoverage=true -p:CoverletOutputFormat=cobertura -p:CoverletOutput=../reports/coverage
+      - name: Validate coverage
+        run: ./scripts/validate_coverage.sh
 
   publish:
     runs-on: self-hosted
