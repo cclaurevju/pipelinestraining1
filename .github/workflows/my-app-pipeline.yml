@@ -45,9 +45,9 @@ jobs:
 
   publish:
     runs-on: self-hosted
-    needs: ["build", "test"]
+    needs: ["build"]
     steps:
-      - uses: actions/checkout@v4
+      # - uses: actions/checkout@v4
 
       - name: Publishing app
         run: dotnet publish
@@ -63,7 +63,7 @@ jobs:
 
   deploy-prod:
     runs-on: self-hosted
-    needs: ["test"]
+    needs: ["test", "publish"]
     steps:
       # - uses: actions/checkout@v4
 
