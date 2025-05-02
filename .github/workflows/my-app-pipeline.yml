@@ -51,8 +51,8 @@ jobs:
 
       - name: Publishing app
         run: |
-          tree ./myApp/bin/Release
           dotnet publish
+          tree ./myApp/bin/Release
 
   deploy-dev:
     runs-on: self-hosted
