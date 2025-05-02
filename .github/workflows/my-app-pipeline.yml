@@ -60,3 +60,12 @@ jobs:
 
       - name: Running app
         run: dotnet run --project ./myApp/myApp.csproj
+
+  deploy-prod:
+    runs-on: self-hosted
+    needs: ["build", "test", "publish"]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Running production app
+        run: ./myApp/bin/Release/netcoreapp8/publish/myApp
