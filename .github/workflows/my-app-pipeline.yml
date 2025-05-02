@@ -69,8 +69,5 @@ jobs:
     steps:
       # - uses: actions/checkout@v4
 
-      # - name: Publishing app
-      #   run: dotnet publish
-
       - name: Running production app
         run: ./myApp/bin/Release/netcoreapp8/publish/myApp
