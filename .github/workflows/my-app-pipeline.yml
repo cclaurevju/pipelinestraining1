@@ -23,11 +23,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Running tests
-        run: dotnet test -p:CollectCoverage=true -p:CoverletOutputFormat=cobertura -p:CoverletOutput=../reports/coverage
-
       - name: Running Jetbrains inspect code
         run: dotnet jb inspectcode TrainProject.sln -o=./reports/report.xml
+
+      - name: Running tests
+        run: dotnet test -p:CollectCoverage=true -p:CoverletOutputFormat=cobertura -p:CoverletOutput=../reports/coverage
 
       - name: Running Report Generator
         run: dotnet reportgenerator -reports:./reports/coverage.cobertura.xml -targetdir:.\reports\coveragereport -reporttypes:Html
