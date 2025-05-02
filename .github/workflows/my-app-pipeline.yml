@@ -22,14 +22,25 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Running Jetbrains inspect code
+        run: dotnet jb inspectcode TrainProject.sln -o=./reports/report.xml
+
+      - name: Running Report Generator
+        run: dotnet reportgenerator -reports:./reports/coverage.cobertura.xml -targetdir:.\reports\coveragereport -reporttypes:Html
+
       - name: Running tests
         run: dotnet test -p:CollectCoverage=true -p:CoverletOutputFormat=cobertura -p:CoverletOutput=../reports/coverage
 
-      - name: Granting permissions to validate coverage
-        run: chmod 777 ./scripts/validate_coverage.sh
+      - name: Granting permissions to scripts
+        run: |
+          chmod +x ./scripts/validate_coverage.sh
+          chmod +x ./scripts/validate_report.sh
 
       - name: Validate coverage
         run: ./scripts/validate_coverage.sh
+
+      - name: Validate report
+        run: ./scripts/validate_report.sh
 
   publish:
     runs-on: self-hosted
