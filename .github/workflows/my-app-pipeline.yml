@@ -23,8 +23,6 @@ jobs:
     runs-on: self-hosted
     needs: ["build"]
     steps:
-      # - uses: actions/checkout@v4
-
       - name: Running Jetbrains inspect code
         run: dotnet jb inspectcode TrainProject.sln -o=./reports/report.xml
 
@@ -49,8 +47,6 @@ jobs:
     runs-on: self-hosted
     needs: ["build", "test"]
     steps:
-      # - uses: actions/checkout@v4
-
       - name: Publishing app
         run: dotnet publish
 
@@ -58,8 +54,6 @@ jobs:
     runs-on: self-hosted
     needs: ["test"]
     steps:
-      # - uses: actions/checkout@v4
-
       - name: Running app
         run: dotnet run --project ./myApp/myApp.csproj
 
@@ -67,7 +61,5 @@ jobs:
     runs-on: self-hosted
     needs: ["test", "publish"]
     steps:
-      # - uses: actions/checkout@v4
-
       - name: Running production app
         run: ./myApp/bin/Release/netcoreapp8/publish/myApp
