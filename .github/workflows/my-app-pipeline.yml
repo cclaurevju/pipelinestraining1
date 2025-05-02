@@ -6,7 +6,9 @@ on:
   pull_request:
     branches: ["carlosClaure_p1_base", "main"]
 
-  workflow_dispatch:
+concurrency:
+  group: ${{ github.head_ref }}
+  cancel-in-progress: true
 
 jobs:
   build:
