@@ -16,3 +16,13 @@ jobs:
 
       - name: Building project
         run: dotnet build
+
+  test:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Running tests
+        run: |
+          cd myApp.Tests
+          dotnet test
