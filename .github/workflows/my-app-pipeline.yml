@@ -29,6 +29,7 @@ jobs:
 
   publish:
     runs-on: self-hosted
+    needs: ["build", "test"]
     steps:
       - uses: actions/checkout@v4
 
@@ -37,6 +38,7 @@ jobs:
 
   deploy-dev:
     runs-on: self-hosted
+    needs: ["build", "test", "publish"]
     steps:
       - uses: actions/checkout@v4
 
