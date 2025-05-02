@@ -21,7 +21,7 @@ jobs:
     runs-on: self-hosted
     needs: ["build"]
     steps:
-      - uses: actions/checkout@v4
+      # - uses: actions/checkout@v4
 
       - name: Running Jetbrains inspect code
         run: dotnet jb inspectcode TrainProject.sln -o=./reports/report.xml
@@ -43,31 +43,34 @@ jobs:
       - name: Validate report
         run: ./scripts/validate_report.sh
 
-  publish:
-    runs-on: self-hosted
-    needs: ["build", "test"]
-    steps:
-      - uses: actions/checkout@v4
+  # publish:
+  #   runs-on: self-hosted
+  #   needs: ["build", "test"]
+  #   steps:
+  #     - uses: actions/checkout@v4
 
-      - name: Publishing app
-        run: |
-          dotnet publish
-          tree ./myApp/bin/Release
+  #     - name: Publishing app
+  #       run: |
+  #         dotnet publish
+  #         tree ./myApp/bin/Release
 
   deploy-dev:
     runs-on: self-hosted
-    needs: ["build", "test", "publish"]
+    needs: ["test"]
     steps:
-      - uses: actions/checkout@v4
+      # - uses: actions/checkout@v4
 
       - name: Running app
         run: dotnet run --project ./myApp/myApp.csproj
 
   deploy-prod:
     runs-on: self-hosted
-    needs: ["build", "test", "publish"]
+    needs: ["test"]
     steps:
-      - uses: actions/checkout@v4
+      # - uses: actions/checkout@v4
+
+      - name: Publishing app
+        run: dotnet publish
 
       - name: Running production app
         run: |
