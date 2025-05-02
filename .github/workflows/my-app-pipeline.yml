@@ -4,7 +4,7 @@ on:
   push:
     branches: ["carlosClaure_p1_dev", "main"]
   pull_request:
-    branches: ["carlosClaure_p1_dev", "main"]
+    branches: ["carlosClaure_p1_base", "main"]
 
   workflow_dispatch:
 
@@ -25,7 +25,7 @@ jobs:
       - name: Running tests
         run: |
           cd myApp.Tests
-          dotnet test
+          dotnet test -p:CollectCoverage=true -p:CoverletOutputFormat=cobertura -p:CoverletOutput=./reports/coverage
 
   publish:
     runs-on: self-hosted
