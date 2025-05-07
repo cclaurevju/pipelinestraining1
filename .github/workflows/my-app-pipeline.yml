@@ -48,7 +48,14 @@ jobs:
     needs: ["build", "test"]
     steps:
       - name: Publishing app
-        run: dotnet publish
+        run: dotnet publish -c Release -r linux-x64 --self-contained true -o publish/
+
+  build-image:
+    runs-on: self-hosted
+    needs: ["publish"]
+    steps:
+      - name: Building app image
+        run: docker build --no-cache -t myapp:1 .
 
   deploy-dev:
     runs-on: self-hosted
@@ -62,4 +69,11 @@ jobs:
     needs: ["test", "publish"]
     steps:
       - name: Running production app
-        run: ./myApp/bin/Release/netcoreapp8/publish/myApp
+        run: ./publish/myApp
+
+  deploy-image:
+    runs-on: self-hosted
+    needs: ["build-image"]
+    steps:
+      - name: Deploying image
+        run: docker run --name myApp myapp:1
