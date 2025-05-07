@@ -50,6 +50,13 @@ jobs:
       - name: Publishing app
         run: dotnet publish -c Release -r linux-x64 --self-contained true -o publish/
 
+  build-image:
+    runs-on: self-hosted
+    needs: ["publish"]
+    steps:
+      - name: Building app image
+        run: docker build --no-cache -t myApp:1 .
+
   deploy-dev:
     runs-on: self-hosted
     needs: ["test"]
