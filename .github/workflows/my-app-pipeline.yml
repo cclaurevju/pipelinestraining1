@@ -70,3 +70,10 @@ jobs:
     steps:
       - name: Running production app
         run: ./publish/myApp
+
+  deploy-image:
+    runs-on: self-hosted
+    needs: ["build-image"]
+    steps:
+      - name: Deploying image
+        run: docker run --name myApp myapp:1
