@@ -55,7 +55,7 @@ jobs:
     needs: ["publish"]
     steps:
       - name: Building app image
-        run: docker build --no-cache -t myApp:1 .
+        run: docker build --no-cache -t myapp:1 .
 
   deploy-dev:
     runs-on: self-hosted
